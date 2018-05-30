@@ -13,7 +13,7 @@ namespace DailyReport.ViewModels
         public ReactiveProperty<string> OutputPath { get; }
 
         [Required(ErrorMessage = "名前を入力してください。")]
-        public ReactiveProperty<string> Name { get; }
+        public ReactiveProperty<string> FileName { get; }
 
         [Required(ErrorMessage = "タイトルを入力してください。")]
         public ReactiveProperty<string> Title { get; }
@@ -31,8 +31,8 @@ namespace DailyReport.ViewModels
             OutputPath = new ReactiveProperty<string>(_settings.OutputPath)
                 .SetValidateAttribute(() => OutputPath);
 
-            Name = new ReactiveProperty<string>(_settings.Name)
-                .SetValidateAttribute(() => Name);
+            FileName = new ReactiveProperty<string>(_settings.Name)
+                .SetValidateAttribute(() => FileName);
 
             Title = new ReactiveProperty<string>(_settings.Title)
                 .SetValidateAttribute(() => Title);
@@ -44,7 +44,7 @@ namespace DailyReport.ViewModels
             SaveTempCommand.Subscribe(() =>
             {
                 _settings.OutputPath = OutputPath.Value;
-                _settings.Name = Name.Value;
+                _settings.Name = FileName.Value;
                 _settings.Title = Title.Value;
                 _settings.Body = Body.Value;
 
@@ -54,7 +54,7 @@ namespace DailyReport.ViewModels
             SaveCommand = new[]
                 {
                     OutputPath.ObserveHasErrors,
-                    Name.ObserveHasErrors,
+                    FileName.ObserveHasErrors,
                     Title.ObserveHasErrors,
                     Body.ObserveHasErrors
                 }

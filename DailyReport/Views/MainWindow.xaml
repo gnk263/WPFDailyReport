@@ -29,8 +29,8 @@
         <Label Content="格納場所" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0"/>
         <TextBox Text="{Binding OutputPath.Value}" Grid.Row="0" Grid.Column="1" />
         
-        <Label Content="名前" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0"/>
-        <TextBox Text="{Binding Name.Value}" Grid.Row="1" Grid.Column="1" />
+        <Label Content="保存ファイル名" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0"/>
+        <TextBox Text="{Binding FileName.Value}" Grid.Row="1" Grid.Column="1" />
 
         <Label Content="タイトル" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="2" Grid.Column="0" />
         <TextBox Text="{Binding Title.Value}" Grid.Row="2" Grid.Column="1" />
