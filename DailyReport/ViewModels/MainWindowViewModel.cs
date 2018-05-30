@@ -9,6 +9,7 @@ namespace DailyReport.ViewModels
 {
     public class MainWindowViewModel : BindableBase
     {
+
         [Required(ErrorMessage = "格納場所を入力してください。")]
         public ReactiveProperty<string> OutputPath { get; }
 
@@ -24,31 +25,26 @@ namespace DailyReport.ViewModels
         public ReactiveCommand SaveTempCommand { get; }
         public ReactiveCommand SaveCommand { get; }
 
-        private readonly SettingsHelper _settings = SettingsHelper.Current;
+        private readonly Report _report = new Report();
 
         public MainWindowViewModel()
         {
-            OutputPath = new ReactiveProperty<string>(_settings.OutputPath)
-                .SetValidateAttribute(() => OutputPath);
+            OutputPath = _report.OutputPath;
+            OutputPath.SetValidateAttribute(() => OutputPath);
 
-            FileName = new ReactiveProperty<string>(_settings.Name)
-                .SetValidateAttribute(() => FileName);
+            FileName = _report.FileName;
+            FileName.SetValidateAttribute(() => FileName);
 
-            Title = new ReactiveProperty<string>(_settings.Title)
-                .SetValidateAttribute(() => Title);
+            Title = _report.Title;
+            Title.SetValidateAttribute(() => Title);
 
-            Body = new ReactiveProperty<string>(_settings.Body)
-                .SetValidateAttribute(() => Body);
+            Body = _report.Body;
+            Body.SetValidateAttribute(() => Body);
 
             SaveTempCommand = new ReactiveCommand();
             SaveTempCommand.Subscribe(() =>
             {
-                _settings.OutputPath = OutputPath.Value;
-                _settings.Name = FileName.Value;
-                _settings.Title = Title.Value;
-                _settings.Body = Body.Value;
-
-                _settings.Save();
+                _report.SaveTemp();
             });
 
             SaveCommand = new[]
@@ -60,6 +56,10 @@ namespace DailyReport.ViewModels
                 }
                 .CombineLatest(x => x.All(y => !y))
                 .ToReactiveCommand();
+            SaveTempCommand.Subscribe(() =>
+            {
+                _report.SaveStorage();
+            });
         }
     }
 }
