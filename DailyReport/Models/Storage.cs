@@ -13,7 +13,7 @@ namespace DailyReport.Models
 
         public bool Save()
         {
-            if (IsExisDirectory(_report.OutputPath.Value))
+            if (!IsExisDirectory(_report.OutputPath.Value))
             {
                 return false;
             }
