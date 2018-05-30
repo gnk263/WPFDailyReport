@@ -68,7 +68,7 @@ namespace DailyReport.Models
         private string GetReportDirectoryName()
         {
             //TODO:何らかの方法で日付指定させる
-            return DateTime.Now.ToString("YYYYMMDD");
+            return DateTime.Now.ToString("yyyyMMdd");
         }
     }
 }
