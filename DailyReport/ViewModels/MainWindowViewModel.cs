@@ -22,6 +22,8 @@ namespace DailyReport.ViewModels
         [Required(ErrorMessage = "内容を入力してください。")]
         public ReactiveProperty<string> Body { get; }
 
+        public ReactiveProperty<string> Message { get; }
+
         public ReactiveCommand SaveTempCommand { get; }
         public ReactiveCommand SaveCommand { get; }
 
@@ -40,6 +42,8 @@ namespace DailyReport.ViewModels
 
             Body = _report.Body;
             Body.SetValidateAttribute(() => Body);
+
+            Message = _report.Message;
 
             SaveTempCommand = new ReactiveCommand();
             SaveTempCommand.Subscribe(() =>

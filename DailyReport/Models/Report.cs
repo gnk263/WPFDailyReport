@@ -10,6 +10,7 @@ namespace DailyReport.Models
         public ReactiveProperty<string> FileName { get; }
         public ReactiveProperty<string> Title { get; }
         public ReactiveProperty<string> Body { get; }
+        public ReactiveProperty<string> Message { get; }
 
         private readonly SettingsHelper _settings = SettingsHelper.Current;
 
@@ -26,6 +27,8 @@ namespace DailyReport.Models
 
             Body = new ReactiveProperty<string>(_settings.Body)
                 .SetValidateAttribute(() => Body);
+
+            Message = new ReactiveProperty<string>();
         }
 
         public void SaveTemp()
@@ -42,6 +45,9 @@ namespace DailyReport.Models
         {
             var storage = new Storage(this);
             var result = storage.Save();
+
+            Message.Value = result ? "格納に成功しました。" : "格納に失敗しました。";
+            Message.ForceNotify();
         }
 
         public string GetReportSaveDirectoryPath()

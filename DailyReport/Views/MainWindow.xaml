@@ -43,6 +43,6 @@
             <Button Content="格納" Command="{Binding SaveCommand}" Width="200" Margin="32" />
         </StackPanel>
         
-        <Label Content="" Grid.Row="5" Grid.Column="1" />
+        <Label Content="{Binding Message.Value}" Grid.Row="5" Grid.Column="1" />
     </Grid>
 </Window>
