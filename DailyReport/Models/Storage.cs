@@ -25,8 +25,8 @@ namespace DailyReport.Models
 
             using (var sw = new StreamWriter(filePath))
             {
-                sw.WriteLine(_report.Title);
-                sw.WriteLine(_report.Body);
+                sw.WriteLine(_report.Title.Value);
+                sw.WriteLine(_report.Body.Value);
             }
 
             return true;
