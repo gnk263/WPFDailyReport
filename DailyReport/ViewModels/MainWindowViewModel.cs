@@ -1,4 +1,6 @@
-﻿using DailyReport.Common;
+﻿using System.Linq;
+using System.Reactive.Linq;
+using DailyReport.Common;
 using Reactive.Bindings;
 
 namespace DailyReport.ViewModels
@@ -15,7 +17,22 @@ namespace DailyReport.ViewModels
 
         public MainWindowViewModel()
         {
-            
+            OutputPath = new ReactiveProperty<string>();
+            Name = new ReactiveProperty<string>();
+            Title = new ReactiveProperty<string>();
+            Body = new ReactiveProperty<string>();
+
+            SaveTempCommand = new ReactiveCommand();
+
+            SaveCommand = new[]
+                {
+                    OutputPath.ObserveHasErrors,
+                    Name.ObserveHasErrors,
+                    Title.ObserveHasErrors,
+                    Body.ObserveHasErrors
+                }
+                .CombineLatest(x => x.All(y => !y))
+                .ToReactiveCommand();
         }
     }
 }
