@@ -60,7 +60,7 @@ namespace DailyReport.ViewModels
                 }
                 .CombineLatest(x => x.All(y => !y))
                 .ToReactiveCommand();
-            SaveTempCommand.Subscribe(() =>
+            SaveCommand.Subscribe(() =>
             {
                 _report.SaveStorage();
             });
