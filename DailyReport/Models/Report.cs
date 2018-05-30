@@ -1,4 +1,5 @@
-﻿using DailyReport.Common;
+﻿using System;
+using DailyReport.Common;
 using Reactive.Bindings;
 
 namespace DailyReport.Models
@@ -39,7 +40,29 @@ namespace DailyReport.Models
 
         public void SaveStorage()
         {
-            
+            var storage = new Storage(this);
+            var result = storage.Save();
+        }
+
+        public string GetReportSaveDirectoryPath()
+        {
+            var directoryName = GetReportDirectoryName();
+            var path = $"{OutputPath.Value}\\{directoryName}";
+
+            return path;
+        }
+
+        public string GetReportSaveFilePath()
+        {
+            var directory = GetReportSaveDirectoryPath();
+
+            return $"{directory}\\{FileName.Value}";
+        }
+
+        private string GetReportDirectoryName()
+        {
+            //TODO:何らかの方法で日付指定させる
+            return DateTime.Now.ToString("YYYYMMDD");
         }
     }
 }
