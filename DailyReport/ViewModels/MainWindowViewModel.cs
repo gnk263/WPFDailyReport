@@ -4,6 +4,7 @@ using System.Reactive.Linq;
 using DailyReport.Common;
 using DailyReport.Models;
 using Reactive.Bindings;
+using Reactive.Bindings.Extensions;
 
 namespace DailyReport.ViewModels
 {
@@ -62,7 +63,7 @@ namespace DailyReport.ViewModels
                     Title.ObserveHasErrors,
                     Body.ObserveHasErrors
                 }
-                .CombineLatest(x => x.All(y => !y))
+                .CombineLatestValuesAreAllFalse()
                 .ToReactiveCommand();
             SaveCommand.Subscribe(() =>
             {
