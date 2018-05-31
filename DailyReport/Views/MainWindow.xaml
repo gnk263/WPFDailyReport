@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:DailyReport.Views"
         xmlns:viewModels="clr-namespace:DailyReport.ViewModels"
         mc:Ignorable="d"
-        Title="MainWindow" Height="800" Width="1000">
+        Title="MainWindow" Height="600" Width="1000">
     
     <Window.DataContext>
         <viewModels:MainWindowViewModel />
@@ -36,11 +36,11 @@
         <TextBox Text="{Binding Title.Value}" Grid.Row="2" Grid.Column="1" />
         
         <Label Content="内容" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="3" Grid.Column="0" />
-        <TextBox Text="{Binding Body.Value}" Grid.Row="3" Grid.Column="1" Height="550" AcceptsReturn="True" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" />
+        <TextBox Text="{Binding Body.Value}" Grid.Row="3" Grid.Column="1" Height="400" AcceptsReturn="True" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" />
         
         <StackPanel Grid.Row="4" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center">
-            <Button Content="一時保存" Command="{Binding SaveTempCommand}" Width="200" Margin="32"/>
-            <Button Content="格納" Command="{Binding SaveCommand}" Width="200" Margin="32" />
+            <Button Content="一時保存" Command="{Binding SaveTempCommand}" Width="200" Margin="8"/>
+            <Button Content="格納" Command="{Binding SaveCommand}" Width="200" Margin="8" />
         </StackPanel>
         
         <Label Content="{Binding Message.Value}" Grid.Row="5" Grid.Column="1" />
