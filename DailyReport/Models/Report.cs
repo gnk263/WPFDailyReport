@@ -39,6 +39,8 @@ namespace DailyReport.Models
             _settings.Body = Body.Value;
 
             _settings.Save();
+
+            UpdateMessage("一時保存しました。");
         }
 
         public void SaveStorage()
@@ -46,10 +48,8 @@ namespace DailyReport.Models
             var storage = new Storage(this);
             var result = storage.Save();
 
-            var date = DateTime.Now.ToString("yyyyMMdd HH:mm:ss");
-
-            Message.Value = result ? $"[{date}] 格納に成功しました。" : $"[{date}]格納に失敗しました。";
-            Message.ForceNotify();
+            var message = result ? "格納に成功しました。" : "格納に失敗しました。";
+            UpdateMessage(message);
         }
 
         public string GetReportSaveDirectoryPath()
@@ -71,6 +71,14 @@ namespace DailyReport.Models
         {
             //TODO:何らかの方法で日付指定させる
             return DateTime.Now.ToString("yyyyMMdd");
+        }
+
+        private void UpdateMessage(string message)
+        {
+            var date = DateTime.Now.ToString("yyyyMMdd HH:mm:ss");
+
+            Message.Value = $"[{date}] {message}";
+            Message.ForceNotify();
         }
     }
 }
