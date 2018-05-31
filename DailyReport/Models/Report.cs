@@ -46,7 +46,9 @@ namespace DailyReport.Models
             var storage = new Storage(this);
             var result = storage.Save();
 
-            Message.Value = result ? "格納に成功しました。" : "格納に失敗しました。";
+            var date = DateTime.Now.ToString("yyyyMMdd HH:mm:ss");
+
+            Message.Value = result ? $"[{date}] 格納に成功しました。" : $"[{date}]格納に失敗しました。";
             Message.ForceNotify();
         }
 
