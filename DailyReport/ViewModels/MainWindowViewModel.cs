@@ -10,11 +10,13 @@ namespace DailyReport.ViewModels
     public class MainWindowViewModel : BindableBase
     {
 
-        [Required(ErrorMessage = "格納場所を入力してください。")]
+        [Required(ErrorMessage = "フォルダパスを入力してください。")]
         public ReactiveProperty<string> OutputPath { get; }
 
-        [Required(ErrorMessage = "名前を入力してください。")]
+        [Required(ErrorMessage = "ファイル名を入力してください。")]
         public ReactiveProperty<string> FileName { get; }
+        
+        public ReadOnlyReactiveProperty<string> OutputFilePath { get; }
 
         [Required(ErrorMessage = "タイトルを入力してください。")]
         public ReactiveProperty<string> Title { get; }
@@ -36,6 +38,8 @@ namespace DailyReport.ViewModels
 
             FileName = _report.FileName;
             FileName.SetValidateAttribute(() => FileName);
+
+            OutputFilePath = _report.OutputFilePath;
 
             Title = _report.Title;
             Title.SetValidateAttribute(() => Title);

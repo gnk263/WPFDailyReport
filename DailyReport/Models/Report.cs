@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reactive.Linq;
 using DailyReport.Common;
 using Reactive.Bindings;
 
@@ -8,6 +9,7 @@ namespace DailyReport.Models
     {
         public ReactiveProperty<string> OutputPath { get; }
         public ReactiveProperty<string> FileName { get; }
+        public ReadOnlyReactiveProperty<string> OutputFilePath { get; }
         public ReactiveProperty<string> Title { get; }
         public ReactiveProperty<string> Body { get; }
         public ReactiveProperty<string> Message { get; }
@@ -21,6 +23,10 @@ namespace DailyReport.Models
 
             FileName = new ReactiveProperty<string>(_settings.Name)
                 .SetValidateAttribute(() => FileName);
+
+            OutputFilePath = OutputPath
+                .CombineLatest(FileName, (x, y) => GetReportSaveFilePath())
+                .ToReadOnlyReactiveProperty();
 
             Title = new ReactiveProperty<string>(_settings.Title)
                 .SetValidateAttribute(() => Title);
